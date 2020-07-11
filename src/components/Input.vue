@@ -1,5 +1,5 @@
 <template>
-<div class="form-group">
+<div class="form-group" :class="!isValid && activated ? 'animate__animated animate__headShake' : ''">
   <label>{{ name }}</label>
   <span class="fa" :class="validClass" v-if="activated">
   </span>

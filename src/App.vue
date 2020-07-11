@@ -1,17 +1,13 @@
 <template>
 <div class="wrapper">
   <div class="sample">
+    <transition appear enter-active-class="animate__animated animate__fadeIn" leave-active-class="animate__animated animate__fadeOut" mode="out-in">
     <form @submit.prevent="formSubmited = true" v-if="!formSubmited">
       <div class="progress">
         <div class="progress-bar" :style="progressWidth"></div>
       </div>
       <div>
-        <app-input v-for="(item, index) in  info" 
-        :name="item.name" 
-        :value.sync="item.value" 
-        :pattern="item.pattern" 
-        :key="index"
-        @changeStatus="onChangeData(index, $event)">
+        <app-input v-for="(item, index) in  info" :name="item.name" :value.sync="item.value" :pattern="item.pattern" :key="index" @changeStatus="onChangeData(index, $event)">
         </app-input>
       </div>
       <button class="btn btn-primary" :disabled="done < info.length">
@@ -20,16 +16,27 @@
     </form>
     <div v-else>
       <table class="table table-bordered">
-        <tr v-for="(item, index) in  info" :key="index">
-          <td>{{ item.name }}</td>
-          <td>{{ item.value }}</td>
-        </tr>
+        <tbody>
+          <tr v-for="(item, index) in  info" :key="index">
+            <td>{{ item.name }}</td>
+            <td>{{ item.value }}</td>
+          </tr>
+        </tbody>
       </table>
     </div>
+    </transition>
   </div>
 </div>
 </template>
-
+<style >
+  .abs {
+    position: absolute;
+    width: 100%;
+  }
+  .sample {
+    position: relative;
+  }
+</style>
 <script>
 import AppInput from './components/Input'
 
