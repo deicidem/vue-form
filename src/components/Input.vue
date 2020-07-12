@@ -1,5 +1,5 @@
 <template>
-<div class="form-group" :class="!isValid && activated ? 'animate__animated animate__headShake' : ''">
+<div class="form-group" :class="isWrong">
   <label>{{ name }}</label>
   <span class="fa" :class="validClass" v-if="activated">
   </span>
@@ -21,6 +21,10 @@ export default {
     }
   },
   computed: {
+    isWrong(){
+      return !this.isValid && this.activated ? 'animate__animated animate__headShake': '';
+    },
+
     isValid() {
       return this.pattern.test(this.value);
     },
